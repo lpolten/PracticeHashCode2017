@@ -9,6 +9,7 @@ int main(int argc, char ** argv) {
         //pizza.print_cells();
         pizza.run_algorithm();
         int score = pizza.get_score();
+        std::cout << "Score: " << score << std::endl;
         return 0;
     }
 

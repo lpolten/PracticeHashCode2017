@@ -49,6 +49,16 @@ void Pizza::print_cells() {
 
 int Pizza::get_score() {
 
+    bool cell_used[_rows][_columns];
+
+    for(size_t i = 0; i < _rows; i++)
+    {
+        for(size_t j = 0; j < _columns; j++)
+        {
+            cell_used[i][j] = false;
+        }
+    }
+
     int score = 0;
 
     for(size_t i = 0; i < _slices.size(); i++)
@@ -63,13 +73,19 @@ int Pizza::get_score() {
         {
             for(unsigned column = slice.column1; column <= slice.column2; column++)
             {
+                if(cell_used[row][column])
+                {
+                    return SLICES_OVERLAP;
+                }
+
+                cell_used[row][column] = true;
                 contents[_cells[row][column]]++;
             }
         }
 
         if(std::max(contents[0],contents[1]) > _max_content or std::min(contents[0],contents[1]) < _min_content)
         {
-            return -1;
+            return SLICES_WRONG_CONTENT;
         }
 
         score += slice.size();
@@ -80,6 +96,11 @@ int Pizza::get_score() {
 
 void Pizza::run_algorithm() {
     //TODO: create slices here.
+
+    Slice slice(2,2,3,3);
+    _slices.push_back(slice);
+    _slices.push_back(Slice(5,5,4,4));
+
 }
 
 

@@ -8,6 +8,9 @@
 #include <vector>
 #include <assert.h>
 
+const int SLICES_WRONG_CONTENT = -1;
+const int SLICES_OVERLAP = -2;
+
 enum Content{T = 0, M =1};
 
 struct Slice{
