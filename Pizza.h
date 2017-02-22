@@ -10,6 +10,7 @@
 
 const int SLICES_WRONG_CONTENT = -1;
 const int SLICES_OVERLAP = -2;
+const int SLICES_OUT_OF_BOUNDS = -3;
 
 enum Content{T = 0, M =1};
 
@@ -44,7 +45,7 @@ public:
     void print_cells();
     int get_score();
     void run_algorithm();
-
+    void write_submission_file(char *);
 private:
 
     unsigned _rows;

@@ -67,6 +67,11 @@ int Pizza::get_score() {
 
         //test if slice is legit
 
+        if(std::max(slice.row1, slice.row2) >= _rows or std::max(slice.column1, slice.column2) >= _columns)
+        {
+            return SLICES_OUT_OF_BOUNDS;
+        }
+
         std::vector<unsigned> contents(2, 0);
 
         for(unsigned row = slice.row1; row <= slice.row2; row++)
@@ -94,8 +99,22 @@ int Pizza::get_score() {
     return score;
 }
 
+void Pizza::write_submission_file(char * output_filename)
+{
+    std::ofstream output_file;
+    output_file.open(output_filename);
+
+    output_file << _slices.size();
+
+    for(size_t i = 0; i < _slices.size(); i++)
+    {
+        Slice const slice = _slices[i];
+        output_file << std::endl << slice.row1 << " " << slice.column1 << " " << slice.row2 << " " << slice.column2;
+    }
+}
+
 void Pizza::run_algorithm() {
-    //TODO: create slices here.
+
 }
 
 

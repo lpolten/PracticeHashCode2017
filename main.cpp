@@ -10,6 +10,7 @@ int main(int argc, char ** argv) {
         pizza.run_algorithm();
         int score = pizza.get_score();
         std::cout << "Score: " << score << std::endl;
+        pizza.write_submission_file("myoutputfile.txt");
         return 0;
     }
 
