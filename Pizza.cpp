@@ -119,8 +119,58 @@ void Pizza::write_submission_file(char * output_filename)
 
 void Pizza::run_algorithm()
 {
-    //TODO: implement algorithm
-    //_slices.push_back(Slice(2,3,3,4));
+    /*greedy algorithm, just adds new legal slices if possible*/
+    bool cell_used[_rows][_columns];
+    for(size_t i = 0; i < _rows; i++)
+    {
+        for(size_t j = 0; j < _columns; j++)
+        {
+            cell_used[i][j] = false;
+        }
+    }
+
+    for(unsigned i = 0; i < _rows;i++)
+    {
+        for(unsigned k = i; k < _rows;k++)
+        {
+            for(unsigned j = 0; j < _columns; j++)
+            {
+                for(unsigned l = j; l < _columns; l++)
+                {
+                    //test if slice is legit
+                    bool this_slice_not_used = true;
+                    std::vector<unsigned> contents(2, 0);
+
+                    for(unsigned row = i; row <= k; row++)
+                    {
+                        for(unsigned column = j; column <= l; column++)
+                        {
+                            if(cell_used[row][column]!=false)
+                            {
+                                this_slice_not_used = false;
+                            }
+                            contents[_cells[row][column]]++;
+                        }
+                    }
+                    if(std::max(contents[0],contents[1]) > _max_content or std::min(contents[0],contents[1]) < _min_content)
+                    {
+                        this_slice_not_used = false;
+                    }
+                    if(this_slice_not_used)
+                    {
+                        _slices.push_back(Slice(i,j,k,l));
+                        for(unsigned row = i; row <= k; row++)
+                        {
+                            for(unsigned column = j; column <= l; column++)
+                            {
+                                cell_used[row][column] = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 
