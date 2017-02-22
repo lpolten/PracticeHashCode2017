@@ -96,11 +96,6 @@ int Pizza::get_score() {
 
 void Pizza::run_algorithm() {
     //TODO: create slices here.
-
-    Slice slice(2,2,3,3);
-    _slices.push_back(slice);
-    _slices.push_back(Slice(5,5,4,4));
-
 }
 
 
