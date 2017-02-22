@@ -111,10 +111,16 @@ void Pizza::write_submission_file(char * output_filename)
         Slice const slice = _slices[i];
         output_file << std::endl << slice.row1 << " " << slice.column1 << " " << slice.row2 << " " << slice.column2;
     }
+
+    output_file.close();
+    /*std::string file_string(output_filename);
+    system(("gedit " + file_string).c_str());*/
 }
 
-void Pizza::run_algorithm() {
-
+void Pizza::run_algorithm()
+{
+    //TODO: implement algorithm
+    //_slices.push_back(Slice(2,3,3,4));
 }
 
 
